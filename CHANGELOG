@@ -9,3 +9,10 @@ protected/config/main.php  -- Added database login credientals. This file is use
 protected/config/console.php  -- Added database login credientals. This file is used whenever you run a migration from the commandline
 protected/config/test.php  -- Added database login credientals. This file modifies main.php whenever phpunit is run
 protected/migrate_all.sh -- Shell script to migrate main and test db
+
+/var/www/Yii-Tutorial/protected$ ./yiic migrate create create_user_table
+
+Yii Migration Tool v1.0 (based on Yii v1.1.13)
+
+Create new migration '/var/www/Yii-Tutorial/protected/migrations/m130128_204446_create_user_table.php'? (yes|no) [no]:yes
+New migration created successfully.
