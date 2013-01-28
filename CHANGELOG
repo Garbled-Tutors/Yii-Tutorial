@@ -2,3 +2,10 @@ Version 1
 ---------
 
 Create a user model and add phpunit testing code
+
+First Commit: 21307a61a699dcc8b9b8beeffa62adce187a6046
+
+protected/config/main.php  -- Added database login credientals. This file is used by the web application
+protected/config/console.php  -- Added database login credientals. This file is used whenever you run a migration from the commandline
+protected/config/test.php  -- Added database login credientals. This file modifies main.php whenever phpunit is run
+protected/migrate_all.sh -- Shell script to migrate main and test db
