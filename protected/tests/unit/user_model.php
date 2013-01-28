@@ -86,6 +86,30 @@ class UserModelTest extends CTestCase
 		$this->assertTrue(count($found_user) != 0);
 		$this->assertTrue($found_user[0]['password'] != $details['password']);
 	}
+	public function testIsAuthenticatedDefaultValue()
+	{
+		$user = new User;
+		$this->assertTrue($user['is_authenticated'] == false);
+
+		$details = generate_random_user_details();
+		add_user_to_database($details);
+		$found_user = User::model()->findAllByAttributes(array('username'=> $details['username']));
+		$this->assertTrue(count($found_user) == 0);
+		$this->assertTrue($user['is_authenticated'] == false);
+	}
+	public function testPasswordAgainstPasswordHash()
+	{
+		$details = generate_random_user_details();
+		add_user_to_database($details);
+		$found_user = User::model()->findAllByAttributes(array('username'=> $details['username']));
+		$this->assertTrue(count($found_user) == 0);
+		$result = $found_user.authenticate($details['password'] + '123');
+		$this->assertTrue($result == false);
+		$this->assertTrue($user['is_authenticated'] == false);
+		$result = $found_user.authenticate($details['password']);
+		$this->assertTrue($result == true);
+		$this->assertTrue($user['is_authenticated'] == true);
+	}
 }
 ?>
 
