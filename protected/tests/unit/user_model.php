@@ -44,7 +44,7 @@ class UserModelTest extends CTestCase
 	}
 	protected function tearDown()
 	{
-		//User::model()->deleteAll();
+		User::model()->deleteAll();
 	}
 	public function testPasswordConfirmationUsingReturnCode()
 	{

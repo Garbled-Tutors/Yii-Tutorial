@@ -11,6 +11,8 @@
  */
 class User extends CActiveRecord
 {
+	public $password_repeat;
+	public $is_authenticated = false;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -29,6 +31,22 @@ class User extends CActiveRecord
 		return 'user';
 	}
 
+	public function save()
+	{
+		if ($this->password != $this->password_repeat) { return false; }
+		$bcrypt = new Bcrypt(8);
+		$this->password = $bcrypt->hash($this->password);
+		$this->password_repeat = $this->password;
+		return parent::save();
+	}
+
+	public function authenticate($password)
+	{
+		$bcrypt = new Bcrypt(2);
+		$this->is_authenticated =  $bcrypt->verify($password, $this->password);
+		return $this->is_authenticated;
+	}
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -39,7 +57,8 @@ class User extends CActiveRecord
 		return array(
 			array('username', 'length', 'max'=>100),
 			array('role', 'length', 'max'=>10),
-			array('password', 'length', 'max'=>50),
+			array('password', 'length', 'max'=>60),
+			array('password_repeat', 'compare', 'compareAttribute' => 'password'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, username, role, password', 'safe', 'on'=>'search'),
