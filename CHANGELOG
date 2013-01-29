@@ -6,6 +6,8 @@ Create a user model and add phpunit testing code
 First Commit: 21307a61a699dcc8b9b8beeffa62adce187a6046
 Last Commit: 047dce122bf5d1a56cd407b35050303e3799e996
 
+    added user authentication function and password hash functions
+
 protected/config/main.php  -- Added database login credientals. This file is used by the web application
 protected/config/console.php  -- Added database login credientals. This file is used whenever you run a migration from the commandline
 protected/config/test.php  -- Added database login credientals. This file modifies main.php whenever phpunit is run
@@ -36,6 +38,8 @@ protected/redo_migrations.sh -- Script file to automate redoing migrations for a
 Version 2
 ---------
 
+First commit - commit 66bcc6e999646143f24f9602ecc95c982c2d07e7
+
 Create Administrative Section with User CRUD and ruby acceptance testing. I have tried to work with phpunit for acceptance testing, but it constantly crashes whereas ruby works right out of the box.
 Make sure you have ruby installed, preferably with rvm, move into the test directory, and then type 'bundle'. You may need to run 'gem install bundler' first. After that you should have everything installed.
 Simply run rspec spec/test_spec.rb from the tests directory to run the tests. The last test is the only one that should fail.
@@ -57,3 +61,5 @@ protected/views/user/create.php
 protected/views/user/index.php
 protected/views/user/update.php
 protected/views/user/view.php
+
+protected/views/user/_form.php -- Changed the role to a dropdown list

@@ -23,7 +23,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'role'); ?>
-		<?php echo $form->textField($model,'role',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->dropDownList($model,'role',array('admin' => 'admin', 'user' => 'user')); ?>
 		<?php echo $form->error($model,'role'); ?>
 	</div>
 
