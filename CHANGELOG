@@ -63,3 +63,7 @@ protected/views/user/update.php
 protected/views/user/view.php
 
 protected/views/user/_form.php -- Changed the role to a dropdown list
+
+
+migrations/m130129_220200_create_user_indices.php -- You cannot delete records by a fields value unless that field is in index. So we needed to create an index for username
+migrations/m130129_220748_add_default_admin_user.php -- This created a default user so that we can log in from the database rather then the hard coded login. The new user is 'admin' and password is 'changeme'
