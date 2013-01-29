@@ -45,3 +45,15 @@ protected/tests/Gemfile -- This contains a list of dependancies for the ruby cod
 protected/tests/Gemfile.lock -- Also contains dependancies. Ignore this file
 protected/tests/spec/spec_helper.rb -- Contains code and variables needed for everytest
 protected/tests/spec/test_spec.rb -- A basic test that makes sure the application works
+
+protected/runtime/gii-1.1.13/CrudCode.php -- Not sure if this is nessisary. May be a temporary file
+protected/controllers/UserController.php -- Runs code before displaying the user views
+protected/views/layouts/main.php -- Added a link to the user admin page. This will only display when logged in, but you can still access the page without loggining in
+protected/views/user/_form.php -- This page and below are the views for each of the forms for manipulating users
+protected/views/user/_search.php
+protected/views/user/_view.php
+protected/views/user/admin.php
+protected/views/user/create.php
+protected/views/user/index.php
+protected/views/user/update.php
+protected/views/user/view.php
