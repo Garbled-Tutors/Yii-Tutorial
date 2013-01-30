@@ -79,3 +79,5 @@ protected/views/user/_form.php -- Added the second password field to the form, a
 protected/tests/bootstrap.php -- Moved generic functions from user_model to here
 protected/tests/unit/user_model.php -- see above
 protected/tests/unit/user_identity_component.php -- Created a test to verify the form checked the database for user names and passwords rather then static fields
+
+protected/components/UserIdentity.php -- This is the component responsible for sessions. I linked it with the user model for authentication.
