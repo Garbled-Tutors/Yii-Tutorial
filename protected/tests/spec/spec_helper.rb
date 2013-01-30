@@ -30,9 +30,6 @@ end
 def reset_database
 	con = Mysql.new 'localhost', 'root', 'sqlpass', 'testtutorial'
 	con.query('DELETE FROM user WHERE 1;')
-	changeme_hash = <<-EOS
-$2a$08$Tt1n.BO/z/Pq8vDLlBzTC.Hcd/Iir20d1m.QoxARJMiaArZWA2es.
-EOS
-	changeme_hash.chomp!
-	con.query "INSERT INTO `user` (`username`, `role`, `password`) VALUES ('admin', 'admin', '#{changeme_hash}');"
+	changeme_hash = '$2a$08$Tt1n.BO/z/Pq8vDLlBzTC.Hcd/Iir20d1m.QoxARJMiaArZWA2es.'
+	con.query "INSERT INTO `user` (`username`, `role`, `password_hash`) VALUES ('admin', 'admin', '#{changeme_hash}');"
 end

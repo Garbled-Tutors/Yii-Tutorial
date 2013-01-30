@@ -11,6 +11,7 @@
  */
 class User extends CActiveRecord
 {
+	public $password;
 	public $password_repeat;
 	public $is_authenticated = false;
 	/**
@@ -35,15 +36,16 @@ class User extends CActiveRecord
 	{
 		if ($this->password != $this->password_repeat) { return false; }
 		$bcrypt = new Bcrypt(8);
-		$this->password = $bcrypt->hash($this->password);
-		$this->password_repeat = $this->password;
+		$this->password_hash = $bcrypt->hash($this->password);
+		$this->password = '';
+		$this->password_repeat = '';
 		return parent::save();
 	}
 
 	public function authenticate($password)
 	{
 		$bcrypt = new Bcrypt(2);
-		$this->is_authenticated =  $bcrypt->verify($password, $this->password);
+		$this->is_authenticated =  $bcrypt->verify($password, $this->password_hash);
 		return $this->is_authenticated;
 	}
 
@@ -61,7 +63,7 @@ class User extends CActiveRecord
 			array('password_repeat', 'compare', 'compareAttribute' => 'password'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, role, password', 'safe', 'on'=>'search'),
+			array('id, username, role', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -103,7 +105,6 @@ class User extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('role',$this->role,true);
-		$criteria->compare('password',$this->password,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

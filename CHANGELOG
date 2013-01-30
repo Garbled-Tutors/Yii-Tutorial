@@ -86,3 +86,10 @@ protected/migrate_bottom.sh -- Simple script to aid in migration testing. This w
 protected/migrations/m130129_000236_increase_user_password_length.php -- This migration and the ones below have been crashing and were written poorly. They did not run correctly on the test database. I fixed this
 protected/migrations/m130129_220200_create_user_indices.php
 protected/migrations/m130129_220748_add_default_admin_user.php
+
+protected/migrations/m130130_222233_rename_user_password_column.php -- Renamed password field in user to password_hash. This will remove some confusion
+protected/models/User.php -- Update user for column change
+protected/tests/spec/spec_helper.rb -- Updated rspecs for column change
+protected/views/user/_view.php -- Removed password hash from showing in the view
+protected/views/user/view.php -- Same as above
+
