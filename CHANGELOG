@@ -75,3 +75,7 @@ protected/tests/spec/spec_helper.rb -- Moved login finctions from test_spec here
 protected/tests/spec/user_spec.rb -- Checks to see if users can log in, and what the navigation looks like when logged in. Currently fails. The test expects the login form to use the database which isn't yet implemented.
 
 protected/views/user/_form.php -- Added the second password field to the form, also removed the max password length
+
+protected/tests/bootstrap.php -- Moved generic functions from user_model to here
+protected/tests/unit/user_model.php -- see above
+protected/tests/unit/user_identity_component.php -- Created a test to verify the form checked the database for user names and passwords rather then static fields
