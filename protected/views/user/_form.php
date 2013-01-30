@@ -29,8 +29,14 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>60)); ?>
+		<?php echo $form->passwordField($model,'password',array()); ?>
 		<?php echo $form->error($model,'password'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'password'); ?>
+		<?php echo $form->passwordField($model,'password_repeat',array()); ?>
+		<?php echo $form->error($model,'password_repeat'); ?>
 	</div>
 
 	<div class="row buttons">

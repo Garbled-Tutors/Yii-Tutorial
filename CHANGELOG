@@ -73,3 +73,5 @@ protected/tests/Gemfile -- Added mysql to gem dependencies
 protected/tests/spec/navigation_spec.rb -- Tests to see if the navigation when logged out is as expected
 protected/tests/spec/spec_helper.rb -- Moved login finctions from test_spec here, also addded a function to reset the database to the defaults.
 protected/tests/spec/user_spec.rb -- Checks to see if users can log in, and what the navigation looks like when logged in. Currently fails. The test expects the login form to use the database which isn't yet implemented.
+
+protected/views/user/_form.php -- Added the second password field to the form, also removed the max password length
