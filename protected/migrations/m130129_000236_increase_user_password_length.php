@@ -11,15 +11,4 @@ class m130129_000236_increase_user_password_length extends CDbMigration
 	{
 		$this->alterColumn('user','password','varchar(50)');
 	}
-
-	/*
-	// Use safeUp/safeDown to do migration with transaction
-	public function safeUp()
-	{
-	}
-
-	public function safeDown()
-	{
-	}
-	*/
 }
