@@ -2,12 +2,14 @@
 define('SAMPLE_USER_NAMES', serialize( array ('bob', 'joe', 'david', 'al', 'ronald') ) );
 define('SAMPLE_ROLES', serialize( array ('user', 'admin') ) );
 define('SAMPLE_PASSWORDS', serialize( array ('securepassword', 'password', 'pass', 'qwerty', 'i3=%~CT!', '*{S&LH2c','UFWmL3p','hCEjBVaqX','QJW58zts','4Vu5mm','XvNB85NDaB') ) );
+
 function get_random_element($const_array)
 {
 	$value_list = unserialize($const_array);
 	$index = rand(1, count($value_list)) - 1;
 	return $value_list[$index];
 }
+
 function generate_random_user_details()
 {
 	$password = get_random_element(SAMPLE_PASSWORDS);
@@ -42,10 +44,12 @@ class UserModelTest extends CTestCase
 	{
 		User::model()->deleteAll();
 	}
+
 	protected function tearDown()
 	{
 		User::model()->deleteAll();
 	}
+
 	public function testPasswordConfirmationUsingReturnCode()
 	{
 		//This makes sure the User Model will not allow new users to be created unless their passwords match
@@ -60,6 +64,7 @@ class UserModelTest extends CTestCase
 		$result = $user->save();
 		$this->assertTrue($result == true);
 	}
+
 	public function testPasswordConfirmationInDatabase()
 	{
 		//This makes sure the User Model will not allow new users to be created unless their passwords match
@@ -69,6 +74,7 @@ class UserModelTest extends CTestCase
 		$found_user = User::model()->findAllByAttributes(array('username'=> $details['username']));
 		$this->assertTrue(count($found_user) == 0);
 	}
+
 	public function testClearTextPasswordsInMemory()
 	{
 		//This checks to see if the model is keeping the users password as clear text in memory
@@ -76,6 +82,7 @@ class UserModelTest extends CTestCase
 		$user = add_user_to_database($details);
 		$this->assertTrue($user->password != $details['password']);
 	}
+
 	public function testClearTextPasswordsInDatabase()
 	{
 		//This checks to see if the model is keeping the users password as clear text in the database
@@ -85,6 +92,7 @@ class UserModelTest extends CTestCase
 		$this->assertTrue(count($found_user) != 0);
 		$this->assertTrue($found_user[0]['password'] != $details['password']);
 	}
+
 	public function testIsAuthenticatedDefaultValue()
 	{
 		$user = new User;
@@ -96,6 +104,7 @@ class UserModelTest extends CTestCase
 		$this->assertTrue(count($found_user) == 1);
 		$this->assertTrue($found_user[0]['is_authenticated'] == false);
 	}
+
 	public function testPasswordAgainstPasswordHash()
 	{
 		$details = generate_random_user_details();

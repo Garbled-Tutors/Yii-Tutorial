@@ -64,6 +64,12 @@ protected/views/user/view.php
 
 protected/views/user/_form.php -- Changed the role to a dropdown list
 
-
 migrations/m130129_220200_create_user_indices.php -- You cannot delete records by a fields value unless that field is in index. So we needed to create an index for username
 migrations/m130129_220748_add_default_admin_user.php -- This created a default user so that we can log in from the database rather then the hard coded login. The new user is 'admin' and password is 'changeme'
+
+protected/tests/Gemfile -- Added mysql to gem dependencies
+												-- make sure to run bundle from the test directory. If you run into errors you may need to install a library.
+												-- This command works for ubuntu "sudo apt-get install libmysqlclient-dev"
+protected/tests/spec/navigation_spec.rb -- Tests to see if the navigation when logged out is as expected
+protected/tests/spec/spec_helper.rb -- Moved login finctions from test_spec here, also addded a function to reset the database to the defaults.
+protected/tests/spec/user_spec.rb -- Checks to see if users can log in, and what the navigation looks like when logged in. Currently fails. The test expects the login form to use the database which isn't yet implemented.
