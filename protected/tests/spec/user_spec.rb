@@ -1,3 +1,4 @@
+require 'pry'
 require_relative 'spec_helper'
 
 EXAMPLE_USERS = ['joe', 'brian', 'david', 'steven', 'taylor']
@@ -45,6 +46,49 @@ describe 'Yii Application', type: :feature do
 			find_link('Logout').click
 			login user_details[:username], user_details[:password]
 			does_link_exist('Logout').should == true
+		end
+
+		it "should not allow blank passwords", js: true do
+			login_admin
+			click_link 'Users'
+			click_link 'Create User'
+			user_details = generate_new_user
+			fill_in 'User_username', with: user_details[:username]
+			select('user', :from => 'User_role')
+			click_button 'Create'
+			page.should have_button 'Create'
+			find_link('Logout').click
+			login user_details[:username], ''
+			does_link_exist('Logout').should == false
+		end
+
+		it "should have the password field blank during an update", js: true do
+			login_admin
+			click_link 'Users'
+			click_link 'Create User'
+			user_details = generate_new_user
+			fill_in 'User_username', with: user_details[:username]
+			select('user', :from => 'User_role')
+			fill_in 'User_password', with: user_details[:password]
+			fill_in 'User_password_repeat', with: user_details[:password]
+			click_button 'Create'
+			click_link 'Update User'
+			find('#User_password').value.should == ''
+		end
+
+		it "should not change a users password when left blank during an update", js: true do
+			login_admin
+			click_link 'Users'
+			click_link 'Create User'
+			user_details = generate_new_user
+			fill_in 'User_username', with: user_details[:username]
+			select('user', :from => 'User_role')
+			fill_in 'User_password', with: user_details[:password]
+			fill_in 'User_password_repeat', with: user_details[:password]
+			click_button 'Create'
+			click_link 'Update User'
+			select('admin', :from => 'User_role')
+			click_save
 		end
 	end
 end
