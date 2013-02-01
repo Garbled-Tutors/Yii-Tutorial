@@ -83,7 +83,8 @@ class UserModelTest extends CTestCase
 		$details = generate_random_user_details();
 		$details['password'] = '';
 		$details['password_repeat'] = '';
-		$this->assertFalse(add_user_to_database($details,false));
+		add_user_to_database($details);
+		$this->assertFalse(lookup_user($details['username']));
 	}
 	public function testUpdateUserWithoutChangingPassword()
 	{

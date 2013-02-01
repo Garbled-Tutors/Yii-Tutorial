@@ -35,10 +35,17 @@ class User extends CActiveRecord
 	public function save()
 	{
 		if ($this->password != $this->password_repeat) { return false; }
-		$bcrypt = new Bcrypt(8);
-		$this->password_hash = $bcrypt->hash($this->password);
-		$this->password = '';
-		$this->password_repeat = '';
+		if ($this->password != '')
+		{
+			$bcrypt = new Bcrypt(8);
+			$this->password_hash = $bcrypt->hash($this->password);
+			$this->password = '';
+			$this->password_repeat = '';
+		}
+		elseif ($this->password_hash == null)
+		{
+			return false;
+		}
 		return parent::save();
 	}
 
