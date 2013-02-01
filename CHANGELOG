@@ -93,3 +93,6 @@ protected/tests/spec/spec_helper.rb -- Updated rspecs for column change
 protected/views/user/_view.php -- Removed password hash from showing in the view
 protected/views/user/view.php -- Same as above
 
+
+protected/tests/bootstrap.php -- Added a function that logs in a user that will aid in testing.
+protected/tests/unit/user_model.php -- Added two tests to verify users did not need to modify their password when changing username and/or role

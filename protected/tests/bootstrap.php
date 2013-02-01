@@ -41,10 +41,35 @@ function build_user_object($details)
 	return $user;
 }
 
-function add_user_to_database($details)
+function add_user_to_database($details, $return_user = true)
 {
+	//Some tests want a simple yes or no return value. If we return a user to these tests, then they print out too much information when failing.
+	//return_user is used for that purpose
 	$user = build_user_object($details);
 	$user->save();
-	return $user;
+	if ($return_user == true)
+	{
+		return $user;
+	}
+	return $user == true;
 }
 
+function try_user_login($username, $password)
+{
+	$found_user = User::model()->findAllByAttributes(array('username'=> $username));
+	if (count($found_user) != 1)
+	{
+		return false;
+	}
+	$user = $found_user[0];
+	$result = $user->authenticate($password);
+	if ($result == false)
+	{
+		return false;
+	}
+	if ($user['is_authenticated'] == false)
+	{
+		return false;
+	}
+	return true;
+}
